@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Valentine Special</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+    <!-- Halaman Password -->
+    <div id="lockscreen">
+        <div class="container">
+            <h2>Enter Passcode</h2>
+            <input type="password" id="passwordInput" disabled>
+            <div class="keypad">
+                <button onclick="addNumber(1)">1</button>
+                <button onclick="addNumber(2)">2</button>
+                <button onclick="addNumber(3)">3</button>
+                <button onclick="addNumber(4)">4</button>
+                <button onclick="addNumber(5)">5</button>
+                <button onclick="addNumber(6)">6</button>
+                <button onclick="addNumber(7)">7</button>
+                <button onclick="addNumber(8)">8</button>
+                <button onclick="addNumber(9)">9</button>
+                <button onclick="clearPassword()">✖</button>
+                <button onclick="addNumber(0)">0</button>
+                <button onclick="checkPassword()">✔</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Halaman Surat -->
+    <div id="suratPage" class="hidden">
+        <div class="container">
+            <h2>Pesan untuk Kamu</h2>
+            <div class="heart" onclick="showMessage()">❤️ Klik di sini ❤️</div>
+            <p id="message" class="hidden">Halo Naa! Selamat Valentine Kamu Pasti dpet banyak coklat yaa ehehee aku ga bisa ngasih coklat ngasih kek gini gapapa kan yaa ❤️</p>
+            <button onclick="goToGallery()">Lanjut ke Galeri</button>
+        </div>
+    </div>
+
+    <!-- Halaman Galeri -->
+    <div id="galleryPage" class="hidden">
+        <div class="container">
+            <h2>Foto nya siapa ni cakep bengitss😆😆</h2>
+            <div class="gallery">
+                <img src="foto1.jpg" alt="Foto 1">
+                <img src="foto2.jpg" alt="Foto 2">
+                <img src="foto3.jpg" alt="Foto 3">
+                <img src="foto4.jpg" alt="Foto 4">
+            </div>
+            <audio id="backgroundMusic" loop>
+                <source src="About you.mp3" type="audio/mpeg">
+                Browser kamu tidak mendukung pemutar musik.
+            </audio>
+            <div class="music-controls">
+                <button onclick="toggleMusic()">Play/Pause Musik</button>
+            </div>
+            <button onclick="exitPage()">Keluar</button>
+        </div>
+    </div>
+
+    <!-- Pesan Keluar -->
+    <div id="exitPage" class="hidden">
+        <div class="container">
+            <h2>Segitu dulu yaa INGET Aku bukan buaya yaa okeyy! 🐊</h2>
+        </div>
+    </div>
+
+    <script>
+        let enteredPassword = "";
+        let music = document.getElementById("backgroundMusic");
+
+        function addNumber(num) {
+            if (enteredPassword.length < 8) {
+                enteredPassword += num;
+                document.getElementById("passwordInput").value = enteredPassword;
+            }
+        }
+
+        function clearPassword() {
+            enteredPassword = "";
+            document.getElementById("passwordInput").value = "";
+        }
+
+        function checkPassword() {
+            const correctPassword = "14022025";
+            if (enteredPassword === correctPassword) {
+                document.getElementById("lockscreen").classList.add("hidden");
+                document.getElementById("suratPage").classList.remove("hidden");
+            } else {
+                alert("Password salah! Coba lagi.");
+                clearPassword();
+            }
+        }
+
+        function showMessage() {
+            document.getElementById("message").classList.toggle("hidden");
+        }
+
+        function goToGallery() {
+            document.getElementById("suratPage").classList.add("hidden");
+            document.getElementById("galleryPage").classList.remove("hidden");
+            music.play();
+        }
+
+        function toggleMusic() {
+            if (music.paused) {
+                music.play();
+            } else {
+                music.pause();
+            }
+        }
+
+        function exitPage() {
+            alert("Aku bukan buayaaa yaa 😖");
+            document.getElementById("galleryPage").classList.add("hidden");
+            document.getElementById("exitPage").classList.remove("hidden");
+            music.pause();
+        }
+    </script>
+</body>
+</html>
